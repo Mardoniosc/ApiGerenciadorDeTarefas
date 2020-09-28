@@ -20,4 +20,9 @@ public class TarefaService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Tarefa.class.getName()));
 	}
+	
+	public Tarefa insert(Tarefa obj) {
+		obj.setId(null);
+		return repo.save(obj);
+	}
 }

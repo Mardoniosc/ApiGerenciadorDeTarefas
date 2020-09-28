@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,12 +30,14 @@ public class TarefaResource {
 	@Autowired
 	private TarefaService service;
 	
+	@CrossOrigin()
 	@GetMapping("/{id}")
 	public ResponseEntity<Tarefa> find(@PathVariable Integer id){
 		Tarefa obj = service.find(id);
 		return ResponseEntity.ok(obj);
 	}
 	
+	@CrossOrigin()
 	@PostMapping
 	public ResponseEntity<Void> insert(@Valid @RequestBody Tarefa obj) {
 		obj = service.insert(obj);
@@ -44,6 +47,7 @@ public class TarefaResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
+	@CrossOrigin()
 	@PutMapping("/{id}")
 	public ResponseEntity<Void> update(@Valid @RequestBody Tarefa obj, @PathVariable Integer id){
 		obj.setId(id);
@@ -52,18 +56,21 @@ public class TarefaResource {
 
 	}
 	
+	@CrossOrigin()
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 	
+	@CrossOrigin()
 	@GetMapping
 	public ResponseEntity<List<Tarefa>> findAll() {
 		List<Tarefa> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 	
+	@CrossOrigin()
 	@GetMapping("/page")
 	public ResponseEntity<Page<Tarefa>> findPage(
 				@RequestParam(value = "page", defaultValue = "0" ) Integer page,
